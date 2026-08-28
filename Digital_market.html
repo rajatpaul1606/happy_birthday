@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>TCI Freight Digital Marketing Work flow</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+    <style>
+        :root {
+            --navy: #003366;
+            --navy-deep: #001a33;
+            --navy-light: #00509e;
+            --gold: #f2c811;
+            --text: #f4f7fb;
+            --muted: #9db0c7;
+            --facebook: #1877f2;
+            --instagram: #e4405f;
+            --google: #4285f4;
+            --youtube: #ff0000;
+            --linkedin: #0a66c2;
+        }
+
+        * { box-sizing: border-box; }
+
+        html, body {
+            margin: 0;
+            width: 100%;
+            height: 100%;
+            height: 100dvh;
+            overflow: hidden;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background:
+                radial-gradient(900px 420px at 50% 0%, rgba(0, 80, 158, 0.4), transparent 55%),
+                linear-gradient(180deg, #001526, #071422 45%, #0b1a2e);
+            color: var(--text);
+        }
+
+        .page {
+            height: 100%;
+            padding: 10px 18px 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex: 0 0 auto;
+            margin-bottom: 4px;
+        }
+
+        .eyebrow {
+            margin: 0;
+            color: var(--gold);
+            letter-spacing: 0.16em;
+            font-size: 11px;
+            text-transform: uppercase;
+        }
+
+        h1 {
+            margin: 2px 0 0;
+            font-size: clamp(18px, 2.1vw, 26px);
+        }
+
+        .glass {
+            position: relative;
+            flex: 1 1 auto;
+            min-height: 0;
+        }
+
+        .hourglass-bg {
+            position: absolute;
+            top: 8%;
+            bottom: 8%;
+            left: 4%;
+            right: 4%;
+            background: rgba(0, 80, 158, 0.06);
+            clip-path: polygon(
+                0% 4%, 0% 96%,
+                46% 58%, 54% 58%,
+                100% 96%, 100% 4%,
+                54% 42%, 46% 42%
+            );
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            pointer-events: none;
+        }
+
+        .hourglass-bg::after {
+            display: none;
+        }
+
+        svg.wires {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .node {
+            position: relative;
+            z-index: 3;
+            text-align: center;
+            min-width: 0;
+            width: 100%;
+            padding: 8px 10px;
+            border-radius: 12px;
+            background: rgba(7, 20, 34, 0.88);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            box-shadow: 0 8px 22px rgba(0, 0, 0, 0.25);
+        }
+
+        .node i { display: block; margin: 0 auto 4px; font-size: 15px; color: var(--gold); }
+        .node b { display: block; font-size: 11px; }
+        .node span { display: block; margin-top: 2px; font-size: 9px; color: var(--muted); }
+
+        .node.on {
+            border-color: var(--gold);
+            box-shadow: 0 0 0 3px rgba(242, 200, 17, 0.18);
+        }
+
+        .node.decision {
+            width: 112px;
+            height: 112px;
+            min-width: 112px;
+            flex: 0 0 112px;
+            padding: 0;
+            border: none;
+            border-radius: 0;
+            background: transparent;
+            box-shadow: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .node.decision::before,
+        .node.decision::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);
+        }
+
+        .node.decision::before {
+            background: rgba(242, 200, 17, 0.85);
+        }
+
+        .node.decision::after {
+            inset: 3px;
+            background: rgba(7, 20, 34, 0.96);
+        }
+
+        .node.decision.on::before {
+            background: var(--gold);
+            filter: drop-shadow(0 0 10px rgba(242, 200, 17, 0.45));
+        }
+
+        .node.decision .diamond-inner {
+            position: relative;
+            z-index: 1;
+            width: 72%;
+            text-align: center;
+        }
+
+        .node.end {
+            border-color: rgba(255, 107, 107, 0.55);
+        }
+
+        .node.end i { color: #ff6b6b; }
+
+        .node .icons {
+            display: flex;
+            justify-content: center;
+            gap: 7px;
+            margin-bottom: 5px;
+        }
+
+        .node .icons i {
+            display: inline-block;
+            margin: 0;
+            font-size: 15px;
+        }
+
+        .social {
+            min-width: 0;
+            padding: 8px 8px;
+        }
+
+        .social i { font-size: 16px; margin-bottom: 3px; }
+        .facebook i { color: var(--facebook); }
+        .instagram i { color: var(--instagram); }
+        .google i { color: var(--google); }
+        .youtube i { color: var(--youtube); }
+        .linkedin i { color: var(--linkedin); }
+
+        .gsearch i { color: #34a853; }
+
+        .layout {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 118px 1fr;
+            gap: 20px;
+            height: 100%;
+            min-height: 0;
+            padding: 6px 10px 8px 6px;
+        }
+
+        .sources,
+        .main-row,
+        .yes-col {
+            display: flex;
+            gap: 16px;
+        }
+
+        .sources {
+            flex-direction: column;
+            height: 100%;
+        }
+
+        .sources .node {
+            flex: 1 1 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stage {
+            display: grid;
+            grid-template-columns: 1fr 148px;
+            grid-template-rows: auto auto 1fr;
+            gap: 16px;
+            min-height: 0;
+        }
+
+        .no-row {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .no-row .node {
+            width: 100%;
+        }
+
+        .main-row {
+            grid-column: 1;
+            grid-row: 2;
+            align-items: center;
+        }
+
+        .main-row .node {
+            flex: 1 1 0;
+        }
+
+        .confirm-slot {
+            grid-column: 2;
+            grid-row: 2;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .yes-col {
+            grid-column: 2;
+            grid-row: 3;
+            flex-direction: column;
+            align-items: stretch;
+            min-height: 0;
+        }
+
+        .yes-col .node {
+            flex: 1 1 0;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .dot {
+            position: absolute;
+            z-index: 4;
+            width: 10px;
+            height: 10px;
+            margin: -5px 0 0 -5px;
+            border-radius: 50%;
+            box-shadow: 0 0 10px currentColor;
+            pointer-events: none;
+        }
+
+        .rupee {
+            position: absolute;
+            z-index: 8;
+            margin: 0;
+            font-weight: 400;
+            font-family: "Segoe UI", Arial, sans-serif;
+            line-height: 1;
+            color: #f2c811;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.35);
+            pointer-events: none;
+            animation: rupeeFall linear forwards;
+        }
+
+        @keyframes rupeeFall {
+            0% {
+                transform: translate(-50%, -10px) rotate(0deg);
+                opacity: 0;
+            }
+            12% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(-50%, 72vh) rotate(18deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 1100px) {
+            .node span { display: none; }
+            .node { min-width: 86px; padding: 10px 8px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <header class="hero">
+            <div>
+                <p class="eyebrow">TCI Freight Digital Marketing Work flow</p>
+                <h1>CNS booking from social media</h1>
+            </div>
+        </header>
+
+        <div class="glass" id="glass">
+            <div class="hourglass-bg"></div>
+            <svg class="wires" id="wires"></svg>
+
+            <div class="layout">
+                <div class="sources">
+                    <div class="node social facebook" id="n-facebook" data-id="facebook"><i class="fa-brands fa-facebook"></i><b>Facebook</b><span>Ads</span></div>
+                    <div class="node social instagram" id="n-instagram" data-id="instagram"><i class="fa-brands fa-instagram"></i><b>Instagram</b><span>Ads</span></div>
+                    <div class="node social google" id="n-google" data-id="google"><i class="fa-brands fa-google"></i><b>Google</b><span>Ads</span></div>
+                    <div class="node social gsearch" id="n-gsearch" data-id="gsearch"><i class="fa-solid fa-magnifying-glass"></i><b>Google Search</b><span>Organic</span></div>
+                    <div class="node social youtube" id="n-youtube" data-id="youtube"><i class="fa-brands fa-youtube"></i><b>YouTube</b><span>Ads</span></div>
+                    <div class="node social linkedin" id="n-linkedin" data-id="linkedin"><i class="fa-brands fa-linkedin"></i><b>LinkedIn</b><span>Ads</span></div>
+                </div>
+
+                <div class="stage">
+                    <div class="no-row">
+                        <div class="node end" id="n-end"><i class="fa-solid fa-ban"></i><b>End flow</b><span>Booking not confirmed</span></div>
+                    </div>
+                    <div class="main-row">
+                        <div class="node" id="n-website"><i class="fa-solid fa-globe"></i><b>Website</b><span>All sources divert here</span></div>
+                        <div class="node" id="n-booking"><i class="fa-solid fa-file-lines"></i><b>Booking page</b><span>Add CNS booking</span></div>
+                        <div class="node" id="n-db"><i class="fa-solid fa-database"></i><b>Order in DB</b><span>Booking saved</span></div>
+                        <div class="node" id="n-mail-book"><i class="fa-solid fa-envelope-open-text"></i><b>Mail booking branch</b><span>Nearest origin branch</span></div>
+                        <div class="node" id="n-call"><i class="fa-solid fa-headset"></i><b>Call customer</b><span>Booking branch call within 1 hour</span></div>
+                    </div>
+                    <div class="confirm-slot">
+                        <div class="node decision" id="n-confirm">
+                            <div class="diamond-inner">
+                                <i class="fa-solid fa-circle-question"></i>
+                                <b>Confirm booking?</b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="yes-col">
+                        <div class="node" id="n-pickup"><i class="fa-solid fa-box-open"></i><b>Pickup consignment</b><span>Collection scheduled</span></div>
+                        <div class="node" id="n-notify">
+                            <div class="icons">
+                                <i class="fa-solid fa-envelope"></i>
+                                <i class="fa-solid fa-comment-sms"></i>
+                                <i class="fa-brands fa-whatsapp"></i>
+                            </div>
+                            <b>Auto confirmation</b>
+                            <span>Mail / Text / WhatsApp</span>
+                        </div>
+                        <div class="node" id="n-track"><i class="fa-solid fa-location-crosshairs"></i><b>Share Tracking ID</b><span>Sent to customer</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var SOCIALS = [
+            { id: "facebook", color: "#1877F2" },
+            { id: "instagram", color: "#E4405F" },
+            { id: "google", color: "#4285F4" },
+            { id: "gsearch", color: "#34A853" },
+            { id: "youtube", color: "#FF0000" },
+            { id: "linkedin", color: "#0A66C2" }
+        ];
+
+        var glass = document.getElementById("glass");
+        var wires = document.getElementById("wires");
+        var paths = {};
+
+        function centerOf(id) {
+            var el = document.getElementById(id);
+            var box = el.getBoundingClientRect();
+            var wrap = glass.getBoundingClientRect();
+            return {
+                x: box.left - wrap.left + box.width / 2,
+                y: box.top - wrap.top + box.height / 2
+            };
+        }
+
+        function curve(a, b) {
+            var cx = (a.x + b.x) / 2;
+            return "M " + a.x + " " + a.y +
+                " C " + cx + " " + a.y + ", " + cx + " " + b.y + ", " + b.x + " " + b.y;
+        }
+
+        function drawWires() {
+            var w = glass.clientWidth;
+            var h = glass.clientHeight;
+            wires.setAttribute("viewBox", "0 0 " + w + " " + h);
+            wires.innerHTML = "";
+            paths = {};
+
+            function addPath(id, d, color) {
+                var p = document.createElementNS("http://www.w3.org/2000/svg", "path");
+                p.setAttribute("id", id);
+                p.setAttribute("d", d);
+                p.setAttribute("fill", "none");
+                p.setAttribute("stroke", color || "rgba(242,200,17,0.42)");
+                p.setAttribute("stroke-width", "2");
+                p.setAttribute("stroke-linecap", "round");
+                wires.appendChild(p);
+                paths[id] = p;
+            }
+
+            var website = centerOf("n-website");
+            var booking = centerOf("n-booking");
+            var db = centerOf("n-db");
+            var mailBook = centerOf("n-mail-book");
+            var call = centerOf("n-call");
+            var confirm = centerOf("n-confirm");
+            var endFlow = centerOf("n-end");
+            var pickup = centerOf("n-pickup");
+            var notify = centerOf("n-notify");
+            var track = centerOf("n-track");
+
+            SOCIALS.forEach(function (social) {
+                addPath("p-" + social.id, curve(centerOf("n-" + social.id), website), social.color);
+            });
+
+            addPath("p-web-book", curve(website, booking));
+            addPath("p-book-db", curve(booking, db));
+            addPath("p-db-mail", curve(db, mailBook));
+            addPath("p-mail-call", curve(mailBook, call));
+            addPath("p-call-confirm", curve(call, confirm));
+            addPath("p-confirm-end", curve(confirm, endFlow), "rgba(255,107,107,0.7)");
+            addPath("p-confirm-pickup", curve(confirm, pickup), "rgba(57,217,138,0.75)");
+            addPath("p-pickup-notify", curve(pickup, notify));
+            addPath("p-notify-track", curve(notify, track));
+        }
+
+        function setOn(ids) {
+            document.querySelectorAll(".node").forEach(function (node) {
+                node.classList.remove("on");
+            });
+            ids.forEach(function (id) {
+                var el = document.getElementById(id);
+                if (el) {
+                    el.classList.add("on");
+                }
+            });
+        }
+
+        function pointOnPath(path, t) {
+            var len = path.getTotalLength();
+            return path.getPointAtLength(Math.max(0, Math.min(1, t)) * len);
+        }
+
+        function animateDot(path, color, duration, done) {
+            var dot = document.createElement("div");
+            dot.className = "dot";
+            dot.style.color = color;
+            dot.style.background = color;
+            glass.appendChild(dot);
+
+            var start = performance.now();
+
+            function tick(now) {
+                var t = (now - start) / duration;
+                if (t >= 1) {
+                    var end = pointOnPath(path, 1);
+                    dot.style.left = end.x + "px";
+                    dot.style.top = end.y + "px";
+                    window.setTimeout(function () {
+                        if (dot.parentNode) {
+                            dot.parentNode.removeChild(dot);
+                        }
+                    }, 120);
+                    if (done) {
+                        done();
+                    }
+                    return;
+                }
+
+                var pt = pointOnPath(path, t);
+                dot.style.left = pt.x + "px";
+                dot.style.top = pt.y + "px";
+                window.requestAnimationFrame(tick);
+            }
+
+            window.requestAnimationFrame(tick);
+        }
+
+        function runParallel() {
+            setOn(["n-facebook", "n-instagram", "n-google", "n-gsearch", "n-youtube", "n-linkedin"]);
+
+            var remaining = SOCIALS.length;
+
+            SOCIALS.forEach(function (social, i) {
+                window.setTimeout(function () {
+                    animateDot(paths["p-" + social.id], social.color, 1100, function () {
+                        remaining -= 1;
+                        if (remaining === 0) {
+                            continueCore();
+                        }
+                    });
+                }, i * 80);
+            });
+        }
+
+        var takeYes = true;
+
+        function continueCore() {
+            setOn(["n-website"]);
+            animateDot(paths["p-web-book"], "#f2c811", 800, function () {
+                setOn(["n-booking"]);
+                animateDot(paths["p-book-db"], "#f2c811", 800, function () {
+                    setOn(["n-db"]);
+                    animateDot(paths["p-db-mail"], "#f2c811", 800, function () {
+                        setOn(["n-mail-book"]);
+                        animateDot(paths["p-mail-call"], "#39d98a", 800, function () {
+                            setOn(["n-call"]);
+                            animateDot(paths["p-call-confirm"], "#f2c811", 800, function () {
+                                setOn(["n-confirm"]);
+                                window.setTimeout(afterConfirm, 400);
+                            });
+                        });
+                    });
+                });
+            });
+        }
+
+        function rainRupees() {
+            var origin = centerOf("n-confirm");
+            var i;
+
+            for (i = 0; i < 14; i += 1) {
+                window.setTimeout(function () {
+                    var el = document.createElement("div");
+                    var drift = (Math.random() * 80) - 40;
+                    var size = 20 + Math.random() * 6;
+                    var duration = 1.5 + Math.random() * 1.2;
+
+                    el.className = "rupee";
+                    el.textContent = "₹";
+                    el.style.left = (origin.x + drift) + "px";
+                    el.style.top = origin.y + "px";
+                    el.style.fontSize = size + "px";
+                    el.style.animationDuration = duration + "s";
+                    glass.appendChild(el);
+
+                    window.setTimeout(function () {
+                        if (el.parentNode) {
+                            el.parentNode.removeChild(el);
+                        }
+                    }, (duration * 1000) + 80);
+                }, i * 80);
+            }
+        }
+
+        function afterConfirm() {
+            var confirmed = takeYes;
+            takeYes = !takeYes;
+
+            if (!confirmed) {
+                animateDot(paths["p-confirm-end"], "#ff6b6b", 800, function () {
+                    setOn(["n-end"]);
+                    window.setTimeout(runParallel, 1400);
+                });
+                return;
+            }
+
+            rainRupees();
+            animateDot(paths["p-confirm-pickup"], "#39d98a", 800, function () {
+                setOn(["n-pickup"]);
+                animateDot(paths["p-pickup-notify"], "#f2c811", 800, function () {
+                    setOn(["n-notify"]);
+                    animateDot(paths["p-notify-track"], "#39d98a", 800, function () {
+                        setOn(["n-track"]);
+                        window.setTimeout(runParallel, 1400);
+                    });
+                });
+            });
+        }
+
+        var started = false;
+
+        function boot() {
+            if (started) {
+                return;
+            }
+            started = true;
+            drawWires();
+            runParallel();
+        }
+
+        window.addEventListener("resize", function () {
+            drawWires();
+        });
+
+        if (document.readyState === "complete") {
+            boot();
+        } else {
+            window.addEventListener("load", boot);
+        }
+    </script>
+</body>
+</html>
