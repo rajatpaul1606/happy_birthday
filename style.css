@@ -1,0 +1,693 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+}
+
+html,
+body {
+    min-height: 100%;
+    min-height: 100dvh;
+    margin: 0;
+    overflow-x: hidden;
+}
+
+body {
+    background:
+        radial-gradient(900px 420px at 15% 0%, rgba(255, 182, 213, 0.55), transparent 60%),
+        radial-gradient(800px 380px at 90% 10%, rgba(216, 180, 254, 0.4), transparent 55%),
+        linear-gradient(180deg, #fff6fb 0%, #ffe4f0 42%, #f8d5e8 100%);
+    font-family: "Quicksand", "Segoe UI", sans-serif;
+    color: #7a3b58;
+}
+
+.main {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    min-height: 100dvh;
+    animation: fadeIn 1s ease;
+    padding-bottom: max(120px, calc(88px + env(safe-area-inset-bottom)));
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.glow {
+    position: fixed;
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 0;
+    filter: blur(10px);
+}
+
+.glow-left {
+    left: -80px;
+    bottom: 80px;
+    background: rgba(255, 183, 197, 0.45);
+}
+
+.glow-right {
+    right: -60px;
+    top: 80px;
+    background: rgba(236, 172, 255, 0.35);
+}
+
+.petals {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.petal {
+    position: absolute;
+    top: -30px;
+    width: 12px;
+    height: 16px;
+    border-radius: 80% 0 80% 0;
+    opacity: 0.75;
+    animation: fall linear infinite;
+}
+
+@keyframes fall {
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(110vh) rotate(360deg); }
+}
+
+.bunting {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 20px 12px 10px;
+}
+
+.flag {
+    width: 38px;
+    height: 52px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 9px;
+    clip-path: polygon(0 0, 100% 0, 50% 100%);
+    font-size: 17px;
+    font-weight: 700;
+    color: #6b2744;
+    box-shadow: 0 6px 10px rgba(160, 70, 110, 0.12);
+}
+
+.flag.spacer {
+    width: 14px;
+    background: none;
+    box-shadow: none;
+}
+
+.flag.rose { background: #ff8fb8; }
+.flag.blush { background: #ffd3e2; }
+.flag.gold { background: #ffe08a; }
+.flag.cream { background: #fff8f0; }
+.flag.lilac { background: #e4c4ff; }
+
+img {
+    width: 100%;
+}
+
+.balloon-border {
+    position: fixed;
+    top: 100%;
+    opacity: 0.55;
+    z-index: 6;
+    filter: hue-rotate(300deg) saturate(1.15);
+}
+
+.eyebrow {
+    margin: 8px 12px 0;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-size: clamp(10px, 2.8vw, 12px);
+    color: #c45d84;
+}
+
+.area {
+    text-align: center;
+    font-family: "Great Vibes", cursive;
+    font-size: clamp(42px, 14vw, 120px);
+    line-height: 1.15;
+    color: #d94a7d;
+    letter-spacing: 1px;
+    font-weight: 400;
+    text-transform: none;
+    padding: 0 12px;
+    word-break: break-word;
+    animation: floatName 3.2s ease-in-out infinite;
+    text-shadow:
+        0 0 18px rgba(255, 255, 255, 0.9),
+        0 8px 18px rgba(217, 74, 125, 0.22);
+}
+
+.subtitle {
+    margin: 0 16px 8px;
+    font-size: clamp(13px, 3.6vw, 16px);
+    color: #b05c7e;
+}
+
+@keyframes floatName {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+}
+
+#nae {
+    text-transform: capitalize;
+    font-style: normal;
+    color: #d94a7d;
+}
+
+#confetti {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.type-wrap {
+    font-size: clamp(15px, 4.4vw, 22px);
+    color: #c45d84;
+    min-height: 64px;
+    font-weight: 600;
+    padding: 0 20px;
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 1.45;
+}
+
+.typed-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+    display: inline-block;
+    max-width: 100%;
+}
+
+.cake {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 3;
+    width: min(280px, 70vw);
+    max-width: min(280px, 70vw);
+    margin: 0;
+    padding: 0;
+    pointer-events: none;
+    filter: drop-shadow(0 16px 18px rgba(180, 70, 110, 0.18));
+}
+
+.hug-scene {
+    position: fixed;
+    left: 50%;
+    bottom: max(8px, env(safe-area-inset-bottom));
+    width: 270px;
+    height: 160px;
+    transform: translateX(-50%);
+    transform-origin: center bottom;
+    z-index: 9;
+    pointer-events: none;
+}
+
+.hug-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-origin: center bottom;
+}
+
+.hug-scene.hugging .hug-inner {
+    animation: squeeze 1.4s ease-in-out infinite;
+}
+
+@keyframes squeeze {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+.hug-scene .lion {
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    transform: translateX(-50%);
+    z-index: 2;
+}
+
+.hug-scene .chicken,
+.hug-scene .goat {
+    position: absolute;
+    z-index: 6;
+    transition: left 0.7s ease, bottom 0.7s ease, transform 0.7s ease;
+}
+
+.hug-scene .chicken {
+    left: 52px;
+    bottom: 40px;
+    transform: scale(0.78);
+}
+
+.hug-scene .goat {
+    left: 128px;
+    bottom: 36px;
+    transform: scale(0.74);
+}
+
+.hug-scene.releasing .chicken {
+    left: -28px;
+    bottom: 8px;
+    transform: scale(1);
+}
+
+.hug-scene.releasing .goat {
+    left: 198px;
+    bottom: 8px;
+    transform: scale(1);
+}
+
+.lion-arms {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 4;
+    overflow: visible;
+}
+
+.arm-left,
+.arm-right {
+    transition: transform 0.7s ease;
+}
+
+.arm-left {
+    transform-origin: 118px 96px;
+}
+
+.arm-right {
+    transform-origin: 152px 96px;
+}
+
+.hug-scene.hugging .arm-left {
+    animation: hugBendLeft 1.3s ease-in-out infinite;
+}
+
+.hug-scene.hugging .arm-right {
+    animation: hugBendRight 1.3s ease-in-out infinite;
+}
+
+.hug-scene.releasing .arm-left,
+.hug-scene.released .arm-left {
+    animation: none;
+    transform: rotate(-42deg);
+}
+
+.hug-scene.releasing .arm-right,
+.hug-scene.released .arm-right {
+    animation: none;
+    transform: rotate(42deg);
+}
+
+@keyframes hugBendLeft {
+    0%, 100% { transform: rotate(10deg); }
+    50% { transform: rotate(22deg); }
+}
+
+@keyframes hugBendRight {
+    0%, 100% { transform: rotate(-10deg); }
+    50% { transform: rotate(-22deg); }
+}
+
+.hug-scene.released .lion,
+.hug-scene.released .lion-arms,
+.hug-scene.released .hug-hearts {
+    opacity: 0;
+    transition: opacity 2.6s ease;
+}
+
+.chicken,
+.goat {
+    filter:
+        drop-shadow(0 0 0.6px #4a2a12)
+        drop-shadow(0 1px 0 #4a2a12)
+        drop-shadow(0 6px 8px rgba(70, 30, 40, 0.38));
+}
+
+.hug-hearts {
+    position: absolute;
+    left: 50%;
+    top: 6px;
+    transform: translateX(-50%);
+    z-index: 7;
+    width: 80px;
+    height: 40px;
+    opacity: 0;
+}
+
+.hug-scene.hugging .hug-hearts {
+    opacity: 1;
+}
+
+.hug-hearts span {
+    position: absolute;
+    left: 50%;
+    color: #ff6b9d;
+    font-size: 18px;
+    animation: heartPop 1.6s ease-in-out infinite;
+}
+
+.hug-hearts span:nth-child(2) {
+    animation-delay: 0.35s;
+    color: #e76f51;
+    font-size: 14px;
+}
+
+.hug-hearts span:nth-child(3) {
+    animation-delay: 0.7s;
+    color: #d94a7d;
+    font-size: 16px;
+}
+
+@keyframes heartPop {
+    0% { opacity: 0; transform: translate(-50%, 10px) scale(0.6); }
+    35% { opacity: 1; }
+    100% { opacity: 0; transform: translate(-50%, -36px) scale(1.15); }
+}
+
+.eyes-open {
+    display: none;
+}
+
+.hug-scene.released .eyes-hug {
+    display: none;
+}
+
+.hug-scene.released .eyes-open {
+    display: inline;
+}
+
+.lion .tail {
+    transform-origin: 44px 108px;
+    animation: wag 0.7s ease-in-out infinite;
+}
+
+.hug-scene.hugging .chicken .pet-inner,
+.hug-scene.releasing .chicken .pet-inner {
+    animation: none;
+}
+
+.hug-scene.hugging .goat .pet-inner,
+.hug-scene.releasing .goat .pet-inner {
+    animation: none;
+    transform: scaleX(-1);
+}
+
+.hug-scene.hugging .legs .leg,
+.hug-scene.releasing .legs .leg {
+    animation: none;
+}
+
+.hug-scene.hugging .chicken .wing {
+    animation: flap 1.1s ease-in-out infinite;
+}
+
+.pet {
+    position: fixed;
+    z-index: 8;
+    pointer-events: none;
+    will-change: left, bottom;
+}
+
+.pet-inner {
+    transform-origin: center bottom;
+    animation: bob 0.45s ease-in-out infinite;
+}
+
+.pet.flip .pet-inner {
+    transform: scaleX(-1);
+    animation: bobFlip 0.45s ease-in-out infinite;
+}
+
+@keyframes bob {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-4px); }
+}
+
+@keyframes bobFlip {
+    0%, 100% { transform: scaleX(-1) translateY(0); }
+    50% { transform: scaleX(-1) translateY(-4px); }
+}
+
+.pet .shadow {
+    fill: rgba(120, 60, 80, 0.22);
+}
+
+.chicken .wing {
+    transform-origin: 48px 42px;
+    animation: flap 0.5s ease-in-out infinite;
+}
+
+.chicken .leg.front {
+    transform-origin: 50px 54px;
+    animation: step 0.38s ease-in-out infinite;
+}
+
+.chicken .leg.back {
+    transform-origin: 38px 54px;
+    animation: step 0.38s ease-in-out infinite reverse;
+}
+
+.goat .tail {
+    transform-origin: 22px 44px;
+    animation: wag 0.5s ease-in-out infinite;
+}
+
+.goat .leg.front-left,
+.goat .leg.back-right {
+    transform-origin: center 62px;
+    animation: step 0.42s ease-in-out infinite;
+}
+
+.goat .leg.front-right,
+.goat .leg.back-left {
+    transform-origin: center 62px;
+    animation: step 0.42s ease-in-out infinite reverse;
+}
+
+@keyframes flap {
+    0%, 100% { transform: rotate(0deg); }
+    50% { transform: rotate(-18deg); }
+}
+
+@keyframes step {
+    0%, 100% { transform: rotate(18deg); }
+    50% { transform: rotate(-18deg); }
+}
+
+@keyframes wag {
+    0%, 100% { transform: rotate(8deg); }
+    50% { transform: rotate(-14deg); }
+}
+
+.party-balloon {
+    position: fixed;
+    bottom: -90px;
+    z-index: 12;
+    width: 34px;
+    height: 44px;
+    border-radius: 50% 50% 48% 48%;
+    pointer-events: none;
+    animation: balloonRise linear forwards;
+}
+
+.party-balloon::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+    width: 8px;
+    height: 8px;
+    margin-left: -4px;
+    background: inherit;
+    clip-path: polygon(50% 0, 0 100%, 100% 100%);
+}
+
+.party-balloon::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 100%;
+    width: 1px;
+    height: 52px;
+    margin-left: -0.5px;
+    background: rgba(90, 40, 60, 0.4);
+}
+
+.party-balloon .shine {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    width: 10px;
+    height: 14px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.55);
+}
+
+@keyframes balloonRise {
+    0% { transform: translateY(0) rotate(-6deg); opacity: 1; }
+    100% { transform: translateY(-120vh) rotate(10deg); opacity: 0.9; }
+}
+
+@media (max-width: 768px) {
+    .glow {
+        width: 180px;
+        height: 180px;
+    }
+
+    .bunting {
+        gap: 4px;
+        padding: 12px 8px 6px;
+        flex-wrap: nowrap;
+        overflow: hidden;
+        justify-content: center;
+    }
+
+    .flag {
+        width: 22px;
+        height: 32px;
+        font-size: 12px;
+        padding-top: 6px;
+        flex: 0 0 auto;
+    }
+
+    .flag.spacer {
+        width: 8px;
+    }
+
+    .container {
+        padding-left: 12px;
+        padding-right: 12px;
+    }
+
+    .pt-4 {
+        padding-top: 0.6rem !important;
+    }
+
+    .main {
+        display: flex;
+        flex-direction: column;
+        padding-bottom: max(84px, calc(68px + env(safe-area-inset-bottom)));
+    }
+
+    .cake {
+        width: min(260px, 72vw);
+        max-width: min(260px, 72vw);
+        margin: 0;
+    }
+
+    .cake img {
+        max-height: 42vh;
+        width: 100%;
+        max-width: 100%;
+        margin: 0 auto;
+        display: block;
+    }
+
+    .hug-scene {
+        transform: translateX(-50%) scale(0.72);
+    }
+
+    .chicken svg {
+        width: 56px;
+        height: 48px;
+    }
+
+    .goat svg {
+        width: 70px;
+        height: 54px;
+    }
+
+    .party-balloon {
+        width: 26px;
+        height: 34px;
+    }
+
+    .lion-body {
+        width: 132px;
+        height: auto;
+    }
+
+    .lion-arms {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+@media (max-width: 400px) {
+    .hug-scene {
+        transform: translateX(-50%) scale(0.62);
+    }
+
+    .flag {
+        width: 20px;
+        height: 28px;
+        font-size: 11px;
+        padding-top: 5px;
+    }
+
+    .cake {
+        width: min(250px, 80vw);
+        max-width: min(250px, 80vw);
+    }
+}
+
+@media (max-height: 520px) and (orientation: landscape) {
+    .bunting {
+        padding-top: 4px;
+    }
+
+    .area {
+        font-size: clamp(28px, 8vw, 48px);
+    }
+
+    .subtitle,
+    .eyebrow {
+        display: none;
+    }
+
+    .cake {
+        width: min(110px, 28vw);
+        max-width: min(110px, 28vw);
+        top: 48%;
+    }
+
+    .cake img {
+        max-height: 22vh;
+    }
+
+    .main {
+        padding-bottom: 90px;
+    }
+
+    .hug-scene {
+        transform: translateX(-50%) scale(0.5);
+    }
+
+    .type-wrap {
+        min-height: 28px;
+        font-size: 14px;
+    }
+}
